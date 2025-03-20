@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import requests
+import joblib
 
 df = pickle.load(open('movies.pkl','rb'))
 movies_list = df['original_title']
