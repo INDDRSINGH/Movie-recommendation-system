@@ -6,7 +6,9 @@ import joblib
 df = pickle.load(open('movies.pkl','rb'))
 movies_list = df['original_title']
 #cos_sim = pickle.load(open('cos_sim.pkl','rb'))
-cos_sim = joblib.load("cosi_simi.pkl")
+#cos_sim = joblib.load("cosi_simi.pkl")
+vector = joblib.load("vector.pkl")
+cos_sim = cosine_similarity(vector)
 
 def fetch_poster(movie_id):
     url = ("https://api.themoviedb.org/3/movie/{}?api_key="
