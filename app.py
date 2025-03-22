@@ -8,7 +8,7 @@ movies_list = df['original_title']
 #cos_sim = pickle.load(open('cos_sim.pkl','rb'))
 #cos_sim = joblib.load("cosi_simi.pkl")
 vector = joblib.load("vector.pkl")
-cos_sim = cosine_similarity(vector)
+#cos_sim = cosine_similarity(vector)
 
 def fetch_poster(movie_id):
     url = ("https://api.themoviedb.org/3/movie/{}?api_key="
@@ -20,7 +20,9 @@ def fetch_poster(movie_id):
     return full_path
 def recommendation(movie):
     indx = df[df['original_title']==movie].index[0]  #
-    movies = sorted(list(enumerate(cos_sim[indx])),reverse=True,key = lambda x:x[1])[1:6]
+    vec = vector[indx].reshape(1, -1)
+    similarity = cosine_similarity(vec, vector)
+    movies = sorted(list(enumerate(similarity.flatten())),reverse=True,key = lambda x:x[1])[1:6]
     # getting top 5 movies with highest similarity score
     movie_name = []
     movie_poster = []
