@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 import requests
 import joblib
+from sklearn.metrics.pairwise import cosine_similarity
 
 df = pickle.load(open('movies.pkl','rb'))
 movies_list = df['original_title']
